@@ -36,7 +36,6 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
             var errorFn = function (httpResponse) {
                 $scope.results = httpResponse;
             }
-            console.log('endpoint'+$scope.endpoint.selected);
 
             if (($scope.apiKey !=  "")&($scope.endpoint.selected != "")){
                 httpClient(query).jsonp_query(successFn, errorFn);

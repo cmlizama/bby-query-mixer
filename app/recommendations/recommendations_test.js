@@ -69,20 +69,15 @@ describe('bby-query-mixer.recommendations module', function () {
                 expect(scope.invokeRecommendationsQuery).toBeDefined();
             });
 
-            it('should clear remix query results when invoked', function () {
-                scope.remixResults = { someKey: 'some value'};
-                scope.invokeRecommendationsQuery();
-                expect(scope.remixResults).toEqual({});
-            });
-
             it('should return an error in an array on a failing response', function () {
-                $httpBackend.expectJSONP('http://api.bestbuy.com/beta/products/?apiKey=inactiveKey&callback=JSON_CALLBACK').respond(403, {
+                $httpBackend.expectJSONP('http://api.bestbuy.com/beta/products/trendingViewed?apiKey=inactiveKey&callback=JSON_CALLBACK').respond(403, {
                     status: 403,
                     errorMessage: "Account Inactive",
                     help: "http://developer.bestbuy.com/get-started"
                 });
 
                 scope.apiKey = 'inactiveKey';
+                scope.endpoint.selected = 'trendingViewed';
                 scope.invokeRecommendationsQuery();
                 $httpBackend.flush();
                 expect(scope.results.data.errorMessage).toEqual("Account Inactive");

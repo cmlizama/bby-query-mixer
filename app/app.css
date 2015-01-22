@@ -293,3 +293,10 @@ input.ng-invalid {
 #trendingRecommendationButton.selected {
     background-image: url(assets/trending_selected.png);
 }
+.endpointContainer{
+    position: relative;
+}
+.recommendationTooltip {
+    position: absolute;
+    top: 0px;
+}

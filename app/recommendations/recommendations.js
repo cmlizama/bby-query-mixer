@@ -4,10 +4,14 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
     '$scope',
     '$resource',
     'recommendationsConfig',
-    function ($scope, $resource, recommendationsConfig) {
+    'categoryConfig',
+    function ($scope, $resource, recommendationsConfig, categoryConfig) {
         $scope.results = {};
         $scope.remixResults = {};
         $scope.skuList = recommendationsConfig.skuList;
+        $scope.categories = angular.copy(categoryConfig);
+        $scope.category = $scope.categories[0];
+        $scope.endpoint = { selected: ""};
 
         var httpClient = function (query) {
             return $resource(query, {}, {
@@ -18,14 +22,11 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
         };
 
         $scope.buildRecommendationsQuery = function () {
-            return $scope.apiKey ? 'http://api.bestbuy.com/beta/products/trendingViewed?apiKey=' + $scope.apiKey + '&callback=JSON_CALLBACK' : '';
+            var categoryOption = $scope.category.value ? '(categoryPath.id='+$scope.category.value+')' : '';
+            return $scope.apiKey ? 'http://api.bestbuy.com/beta/products/'+$scope.endpoint.selected+categoryOption+'?apiKey=' + $scope.apiKey + '&callback=JSON_CALLBACK' : '';
         };
-        $scope.buildRemixQuery = function () {
-            return ($scope.apiKey !== '') && ($scope.skuList !== '') ? 'http://api.remix.bestbuy.com/v1/products(sku in(' + $scope.skuList + '))?apiKey=' + $scope.apiKey + '&format=json&show=sku,name,description,image,addToCartUrl,salePrice&callback=JSON_CALLBACK' : '';
-        }
 
         $scope.invokeRecommendationsQuery = function () {
-            $scope.skuList = recommendationsConfig.skuList;
             $scope.results = "Running";
             $scope.remixResults = {};
             var query = $scope.buildRecommendationsQuery();
@@ -55,15 +56,18 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
             httpClient(query).jsonp_query(successFn, errorFn);
         };
 
-        $scope.buildSkuList = function () {
-            $scope.skuList = $scope.results.results.map(function (result) {
-                return result.sku;
-            }).join(',');
-        };
-
         $scope.isRemixQueryButtonDisabled = function () {
             return ($scope.skuList == recommendationsConfig.skuList);
         };
+
+        $scope.resetRecommendationsQuery = function () {
+            $scope.remixResults = {};
+            $scope.endpoint = {selected:""};
+            $scope.category = $scope.categories[0];
+        }
+
+        // $scope.popularImage = "assets/popular.png";
+        // $scope.trendImage = "assets/trending.png";
+
     }
-])
-;
+]);

@@ -174,6 +174,8 @@ label:after {
     width: 100%;
     min-height: 8em;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    height: 400px;
+    color: black;
 }
 
 #api-key {
@@ -217,10 +219,6 @@ label { display: block; }
     width:75%
 }
 
-#product-query-result {
-    color:black; 
-    height:400px
-}
 .showOptionsCheckbox label {
     padding-left: 7px;
 }
@@ -248,7 +246,7 @@ input.rounded {
     color: white;
     /*color: #032741;*/
     font-weight: bold;
-    margin-left: 5%;
+    /*margin-left: 5%;*/
 }
 
 .numberIcon {
@@ -256,4 +254,42 @@ input.rounded {
 }
 input.ng-invalid {
   border: 1px solid red;
+}
+
+.query-button:hover {
+    color: #0099FF;
+    border-color: #0099FF;
+}
+
+#recommendationsFooterNote{
+    font-style: italic;
+    font-size: 0.85em;
+}
+#popularRecommendationButton {
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-image: url(assets/popular.png);
+    height: 100px;
+    width: 100px;
+}
+#popularRecommendationButton:hover{
+    background-image: url(assets/popular_hover.png);
+}
+#popularRecommendationButton.selected {
+    background-image: url(assets/popular_selected.png);
+}
+#trendingRecommendationButton {
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-image: url(assets/trending.png);
+    height: 100px;
+    width: 100px;
+}
+#trendingRecommendationButton:hover{
+    background-image: url(assets/trending_hover.png);
+}
+#trendingRecommendationButton.selected {
+    background-image: url(assets/trending_selected.png);
 }

@@ -116,9 +116,7 @@ angular.module('bby-query-mixer.productSearch').controller('ProductSearchCtrl', 
             $scope.option = {
                 showOptions: ['sku', 'name']
             };
-            $scope.push = 10;
             $scope.whichPage = 1;
-            $scope.sortBy = 'customerTopRated';
             $scope.sortOrder = 'asc';
             $scope.complexAttr = '';
             $scope.complexVal = '';
@@ -134,13 +132,6 @@ angular.module('bby-query-mixer.productSearch').controller('ProductSearchCtrl', 
 
     }
 ])
-// angular.module('bby-query-mixer.productSearch').filter('spaceless',function() {
-//     return function(input) {
-//         if (input) {
-//             return input.replace(/\s+/g, '&');    
-//         }
-//     }
-// })
 angular.module('bby-query-mixer.productSearch').directive("spaceless", function(){
    return {
       require: 'ngModel',
@@ -156,4 +147,4 @@ angular.module('bby-query-mixer.productSearch').directive("spaceless", function(
         });
       }
     };
-});;
+});

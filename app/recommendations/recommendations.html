@@ -9,16 +9,17 @@
                 <h4><span class="fa-stack fa-3x numberIcon">
                     <i class="fa fa-circle fa-stack-2x icon-stack-base"></i>
                     <strong class="char-overlay fa-stack-1x">1</strong>
-                    </span> Pick Your Endpoint</h4>
+                    </span> Pick Your Endpoint</i>
+</h4>
                 <div class="row content-container">
                     <div class="col-sm-6">
-                        <input ng-class="{'selected': (endpoint.selected === 'mostViewed')}" type="button" id="popularRecommendationButton" ng-click="endpoint.selected = 'mostViewed'; mostViewed = !mostViewed;" ng-init="mostViewed = false"></input><i class="fa fa-question-circle"></i>
+                        <input ng-class="{'selected': (endpoint.selected === 'mostViewed')}" type="button" id="popularRecommendationButton" ng-click="endpoint.selected = 'mostViewed'; mostViewed = !mostViewed;" ng-init="mostViewed = false"></input><i class="fa fa-question-circle" tooltip="Most viewed products overrall on Bestbuy.com" tooltip-placement="right"></i>
 
                     </div>
                     <div class="col-sm-6">
                         <input ng-class="{'selected': (endpoint.selected === 'trendingViewed')}" type="button" id="trendingRecommendationButton" ng-click="endpoint.selected = 'trendingViewed'; trendingViewed = !trendingViewed;" 
                         ng-init="trendingViewed = false"
-                        ></input><i class="fa fa-question-circle"></i>
+                        ></input><i class="fa fa-question-circle" tooltip="Fastest growing most viewed products on Bestbuy.com" tooltip-placement="right"></i>
 
                     </div>
                 </div>
@@ -52,7 +53,6 @@
                     <p><a class="breakdownLabel" href="https://developer.bestbuy.com/documentation#advancedSearch-search">baseURL</a> : https://api.remix.bestbuy.com/v1/products</p>
                     <p ng-show="category.value"><a class="breakdownLabel" href="https://developer.bestbuy.com/documentation/products-api#documentation/products-api-categorizations">categoryId</a> : (categoryPath.id=<span ng-bind="category.value"></span>)</p>
                     <p><a class="breakdownLabel" href="https://remix.mashery.com/member/register">apiKey</a> : ?apiKey=<span ng-bind="apiKey"></span><span ng-show="sortBy != 'none'"></p>
-                    <p><a class="breakdownLabel" href="https://developer.bestbuy.com/documentation#pagination-pagination">pagination</a> : pageSize=<span ng-bind="pagesize"></span>&page=<span ng-bind="whichPage"></span></p>
                     <p><a class="breakdownLabel" href="https://developer.bestbuy.com/documentation#responseFormat-response-format">callback</a> : &callback=JSON_CALLBACK</span></p>
                 </div>
             </div>
@@ -60,7 +60,7 @@
             <div class="content-container" id="response-content">
                 <div>
                     <p>#request:
-                        <button id="recommendations-copy-button" class="copy-button" type="button" clip-copy="buildRecommendationsQuery()">
+                        <button id="recommendations-copy-button" class="copy-button" type="button" clip-copy="buildRecommendationsQuery()" tooltip="copy" tooltip-placement="right">
                             <img src="assets/clipboard_white.png" width="20" height="20" alt="copy"/>
                         </button>
                     </p>

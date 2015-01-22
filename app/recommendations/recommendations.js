@@ -22,38 +22,29 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
         };
 
         $scope.buildRecommendationsQuery = function () {
-            var categoryOption = $scope.category.value ? '(categoryPath.id='+$scope.category.value+')' : '';
+            var categoryOption = $scope.category.value ? '(categoryId='+$scope.category.value+')' : '';
             return $scope.apiKey ? 'http://api.bestbuy.com/beta/products/'+$scope.endpoint.selected+categoryOption+'?apiKey=' + $scope.apiKey + '&callback=JSON_CALLBACK' : '';
         };
 
         $scope.invokeRecommendationsQuery = function () {
             $scope.results = "Running";
-            $scope.remixResults = {};
             var query = $scope.buildRecommendationsQuery();
 
             var successFn = function (value) {
                 $scope.results = value;
-                $scope.buildSkuList();
-            };
+                };
             var errorFn = function (httpResponse) {
                 $scope.results = httpResponse;
             }
-            httpClient(query).jsonp_query(successFn, errorFn);
-        };
+            console.log('endpoint'+$scope.endpoint.selected);
 
-        $scope.invokeRemixQuery = function () {
-            $scope.remixResults = "Running";
-            var query = $scope.buildRemixQuery();
-            var successFn = function (value) {
-                $scope.remixResults = value;
+            if (($scope.apiKey !=  "")&($scope.endpoint.selected != "")){
+                httpClient(query).jsonp_query(successFn, errorFn);
+            }else if ($scope.apiKey ===  ""){
+                $scope.results = "Please enter your API Key";
+            } else{
+                $scope.results = "Please pick an endpoint"
             };
-            var errorFn = function (httpResponse) {
-                console.log('invokeRemixQuery failure: ' + JSON.stringify(httpResponse));
-                $scope.remixResults = [
-                    {error: httpResponse}
-                ];
-            }
-            httpClient(query).jsonp_query(successFn, errorFn);
         };
 
         $scope.isRemixQueryButtonDisabled = function () {
@@ -61,7 +52,7 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
         };
 
         $scope.resetRecommendationsQuery = function () {
-            $scope.remixResults = {};
+            $scope.results = {};
             $scope.endpoint = {selected:""};
             $scope.category = $scope.categories[0];
         }

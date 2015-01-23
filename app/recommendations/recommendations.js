@@ -6,12 +6,8 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
     'recommendationsConfig',
     'categoryConfig',
     function ($scope, $resource, recommendationsConfig, categoryConfig) {
-        $scope.results = {};
-        $scope.remixResults = {};
-        $scope.skuList = recommendationsConfig.skuList;
         $scope.categories = angular.copy(categoryConfig);
         $scope.category = $scope.categories[0];
-        $scope.endpoint = { selected: ""};
 
         var httpClient = function (query) {
             return $resource(query, {}, {
@@ -22,8 +18,13 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
         };
 
         $scope.buildRecommendationsQuery = function () {
-            var categoryOption = $scope.category.value ? '(categoryId='+$scope.category.value+')' : '';
-            return $scope.apiKey ? 'http://api.bestbuy.com/beta/products/'+$scope.endpoint.selected+categoryOption+'?apiKey=' + $scope.apiKey + '&callback=JSON_CALLBACK' : '';
+            var baseUrl = 'http://api.bestbuy.com/beta/products/';
+            var queryArgs = [];
+            var endpointSelection = $scope.endpoint.selected ? baseUrl += ($scope.endpoint.selected) : '';
+            var categoryOption = $scope.category.value ? baseUrl += ('(categoryId='+$scope.category.value+')') : '';
+            var addKey = $scope.apiKey ? baseUrl += ('?apiKey='+$scope.apiKey):'';
+            baseUrl += '&callback=JSON_CALLBACK';
+            return baseUrl;
         };
 
         $scope.invokeRecommendationsQuery = function () {
@@ -42,7 +43,7 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
             }else if ($scope.apiKey ===  ""){
                 $scope.results = "Please enter your API Key";
             } else{
-                $scope.results = "Please pick an endpoint"
+                $scope.results = "Please pick an endpoint";
             };
         };
 
@@ -54,10 +55,10 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
             $scope.results = {};
             $scope.endpoint = {selected:""};
             $scope.category = $scope.categories[0];
-        }
+        };
 
-        // $scope.popularImage = "assets/popular.png";
-        // $scope.trendImage = "assets/trending.png";
+        //this loads our default model scopes on page load
+        $scope.resetRecommendationsQuery();
 
     }
 ]);

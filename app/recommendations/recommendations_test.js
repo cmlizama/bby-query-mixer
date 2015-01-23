@@ -38,10 +38,6 @@ describe('bby-query-mixer.recommendations module', function () {
             expect(ctrl).toBeDefined();
         });
 
-        it('should have a skuList constant defined', function () {
-            expect(scope.skuList).toBe('sku1,sku2,sku3');
-        });
-
         describe('buildRecommendationsQuery function', function () {
             it('should have a recommendationsQuery function', function () {
                 expect(scope.buildRecommendationsQuery).toBeDefined();
@@ -50,10 +46,6 @@ describe('bby-query-mixer.recommendations module', function () {
             it('should return a url when apiKey is supplied', function () {
                 scope.apiKey = 'someApiKey';
                 expect(scope.buildRecommendationsQuery()).toEqual('http://api.bestbuy.com/beta/products/?apiKey=someApiKey&callback=JSON_CALLBACK')
-            });
-
-            it('should return a empty string when a empty apiKey is passed in', function () {
-                expect(scope.buildRecommendationsQuery("")).toEqual("")
             });
         });
 
@@ -90,7 +82,7 @@ describe('bby-query-mixer.recommendations module', function () {
         describe('resetQuery function', function (){
             it('should reset all relevant query params', function () {
                 scope.resetRecommendationsQuery();
-                expect(scope.remixResults).toEqual({});
+                expect(scope.results).toEqual({});
                 expect(scope.endpoint).toEqual({selected:""});
                 expect(scope.category).toEqual(scope.categories[0]);
             });

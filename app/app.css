@@ -231,7 +231,7 @@ label { display: block; }
     font-family: 'Avenir Next', Avenir, 'Proxima Nova', proxima-nova, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 #keywordSearchInput {
-    width: 33%;
+    width: 100%;
 }
 input.rounded {
     border: 1px solid #ccc;
@@ -299,4 +299,18 @@ input.ng-invalid {
 .recommendationTooltip {
     position: absolute;
     top: 0px;
+}
+.attributeInputs{
+    width: 85%;
+}
+@media (min-width: 1600px) {
+    .attributeInputs{
+        width: 70%;
+}
+}
+#sortOptions{
+    display: block;
+}
+#sortOptions > span{
+    padding-right: 2%;
 }

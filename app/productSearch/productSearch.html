@@ -19,7 +19,7 @@
                                     ng-options="attr as attr.text for attr in attributeOptions"></select>
                             <select ng-show="attributeOption.value" id="operator" ng-model="operator"
                                     ng-options="opt as opt.value for opt in attributeOption.operator"></select>
-                            <input ng-show="attributeOption.value" type="text" ng-model="complexVal" placeholder="{{attributeOption.placeholder}}">
+                            <input ng-show="attributeOption.value" type="{{attributeOption.type}}" ng-model="complexVal" placeholder="{{attributeOption.placeholder}}">
                         </form>
                     </div>
                     <div class="attributeInputs">

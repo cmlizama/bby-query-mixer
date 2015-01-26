@@ -263,7 +263,7 @@ input.ng-invalid {
 
 #recommendationsFooterNote{
     font-style: italic;
-    font-size: 0.85em;
+    font-size: 1em;
 }
 #popularRecommendationButton {
     overflow: hidden;
@@ -295,6 +295,11 @@ input.ng-invalid {
 }
 .endpointContainer{
     position: relative;
+    display: inline-block;
+    padding-left: 5%;
+}
+.endpointContainer > span {
+    margin-right: 10%;
 }
 .recommendationTooltip {
     position: absolute;
@@ -313,4 +318,7 @@ input.ng-invalid {
 }
 #sortOptions > span{
     padding-right: 2%;
+}
+.errorResult {
+    color: red;
 }

@@ -39,10 +39,13 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
             }
 
             if (($scope.apiKey !=  "")&($scope.endpoint.selected != "")){
+                $scope.errorResult = false;
                 httpClient(query).jsonp_query(successFn, errorFn);
             }else if ($scope.apiKey ===  ""){
+                $scope.errorResult = true;
                 $scope.results = "Please enter your API Key";
             } else{
+                $scope.errorResult = true;
                 $scope.results = "Please pick an endpoint";
             };
         };
@@ -55,6 +58,8 @@ angular.module('bby-query-mixer.recommendations').controller('RecommendationsCtr
             $scope.results = {};
             $scope.endpoint = {selected:""};
             $scope.category = $scope.categories[0];
+            $scope.errorResult = false;
+
         };
 
         //this loads our default model scopes on page load

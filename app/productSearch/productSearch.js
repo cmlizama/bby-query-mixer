@@ -67,8 +67,10 @@ angular.module('bby-query-mixer.productSearch').controller('ProductSearchCtrl', 
                 ];
             }
             if ($scope.apiKey) {
+                $scope.errorResult = false;
             httpClient(query).jsonp_query(successFn, errorFn);
             }else{
+                $scope.errorResult = true;
                 $scope.remixResults = 'Please enter your API Key';
             }
         };
@@ -112,9 +114,17 @@ angular.module('bby-query-mixer.productSearch').controller('ProductSearchCtrl', 
             $scope.sortOrder = $scope.sortOrderOptions[0];
             $scope.remixResults = {};
             $scope.keywordSearch = '';
+            $scope.errorResult = false;
         };
         //calling the function here loads the defaults on page load
         $scope.resetParams();
+
+        $scope.preselectOperator = function() {
+            console.log('yo');
+            $scope.attributeOption.operator.value = $scope.attributeOption.operator[0].value
+            // $scope.operator = $scope.attributeOption.operator[0].value
+        };
+
     }
 ])
 angular.module('bby-query-mixer.productSearch').directive("spaceless", function(){

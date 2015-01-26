@@ -5,12 +5,10 @@ angular.module('bby-query-mixer.productSearch').controller('ProductSearchCtrl', 
     'categoryConfig',
     '$http',
     '$resource',
-    'operatorOptionsConfig',
     'showOptionsConfig',
     'attributeOptionsConfig',
-    function ($scope, categoryConfig, $http, $resource, operatorOptionsConfig, showOptionsConfig, attributeOptionsConfig) {
+    function ($scope, categoryConfig, $http, $resource, showOptionsConfig, attributeOptionsConfig) {
         $scope.categories = angular.copy(categoryConfig);
-        $scope.operatorOptions = angular.copy(operatorOptionsConfig);
         $scope.showOptions = angular.copy(showOptionsConfig);
         $scope.attributeOptions = angular.copy(attributeOptionsConfig);
 
@@ -101,7 +99,6 @@ angular.module('bby-query-mixer.productSearch').controller('ProductSearchCtrl', 
 
         $scope.resetParams = function () {
             $scope.category = $scope.categories[0];
-            $scope.operatorOption = $scope.operatorOptions[0];
             $scope.option = {
                 showOptions: ['sku', 'name']
             };
